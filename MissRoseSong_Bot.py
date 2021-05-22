@@ -41,7 +41,8 @@ def start(client, message):
       InlineKeyboardButton('Cᴏɴᴛᴀᴄᴛ Mʏ Cʀᴇᴀᴛᴏʀ ', url='https://t.me/amzmtaccount')
     ]]
 
-@bot.on_message(filters.command(['mt', 'song']))
+
+@Client.on_message(filters.command(['mt', 'song']) & filters.chat(@mt_music_24))
 def a(client, message):
     query = ''
     for i in message.command[1:]:
