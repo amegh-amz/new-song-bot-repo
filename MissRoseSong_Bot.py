@@ -42,7 +42,8 @@ def start(client, message):
     ]]
 
 
-@bot.on_message(filters.command(['mt']) & (filters.chat("mt_music_24") | filters.user("Aswin_Raj_TG")))
+
+@bot.on_message(filters.command(['mt']))
 def a(client, message):
     query = ''
     for i in message.command[1:]:
