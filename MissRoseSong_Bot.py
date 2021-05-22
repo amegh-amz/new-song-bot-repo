@@ -43,7 +43,7 @@ def start(client, message):
 
 
 @Client.on_message(filters.command(['mt', 'song', 'music', 'yt']) & (filters.chat("mt_music_24") | filters.user("Aswin_Raj_TG")))
-def song_dl(client, message):
+def a(client, message):
     query = ''
     for i in message.command[1:]:
         query += ' ' + str(i)
