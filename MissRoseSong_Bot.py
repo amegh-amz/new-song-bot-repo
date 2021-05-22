@@ -1,4 +1,4 @@
-# © Mr_Dark_Prince
+
 from pyrogram import Client, filters
 from pyrogram.types import (
     InlineKeyboardButton,
@@ -29,27 +29,25 @@ def time_to_seconds(time):
 ## Commands --------------------------------
 @bot.on_message(filters.command(['start']))
 def start(client, message):
-    darkprince = f'👋 Hello @{message.from_user.username}\n\n [😌🍀🤚](https://telegra.ph/file/86cc2e654b1157f12b94f.jpg)\n I\'m Rose, I can upload songs from YouTube. Type /a song name:'
+    darkprince = f' Hello {message.from_user.mention},\n\nMy Name Is Emma.I can upload songs from YouTube. But I Can Only Work In My Music Group'
     message.reply_text(
         text=darkprince, 
         quote=False,
         reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton('Owner🎸', url='https://t.me/mr_dark_prince'),
-                    InlineKeyboardButton('Source💿', url='https://github.com/Mr-Dark-Prince/MissRose')
-                ]
-            ]
-        )
-    )
+     [[
+      InlineKeyboardButton('Music Group ', url='https://t.me/mt_music_24'),
+      InlineKeyboardButton('Movie Group ', url='https://t.me/mt_chats_24')
+     ],[
+      InlineKeyboardButton('Cᴏɴᴛᴀᴄᴛ Mʏ Cʀᴇᴀᴛᴏʀ ', url='https://t.me/amzmtaccount')
+    ]]
 
-@bot.on_message(filters.command(['a']))
+@bot.on_message(filters.command(['mt', 'song']))
 def a(client, message):
     query = ''
     for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
-    m = message.reply('🔎 Searching the song...')
+    m = message.reply('`Searching Your Music...`')
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = []
@@ -87,7 +85,7 @@ def a(client, message):
         )
         print(str(e))
         return
-    m.edit("⏬ Downloading.")
+    m.edit("`Uploading Your Music. Please Wait...")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
