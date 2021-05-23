@@ -28,7 +28,7 @@ def time_to_seconds(time):
 ## Commands --------------------------------
 @bot.on_message(filters.command(['start']))
 def start(client, message):
-    amegh ="**Hi [{}](message.from_user.mention),\n\nI Can Download Song's From YouTube. But I Can Only Work In My Music Group.**"
+    amegh ="**Hi Bro,\n\nI Can Download Song's From YouTube.\nI Can Only Work In My Owners Group.**"
     message.reply_text(
         text=amegh, 
         quote=False,
@@ -42,7 +42,7 @@ def start(client, message):
         )
     )
 
-@bot.on_message(filters.command(['mt']))
+@bot.on_message(filters.command(['mt', 'song'])) & (filters.chat("mt_music_24") | filters.user("Aswin_Raj_TG")))
 def a(client, message):
     query = ''
     for i in message.command[1:]:
@@ -92,7 +92,7 @@ def a(client, message):
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = f'🎧 **Title**: [{title[:35]}]({link})\n⏳ **Duration**: `{duration}`\n👁‍🗨 **Views**: `{views}`'
+        rep = f'**✣ Title**: **[{title[:35]}]({link})**\n**✣ Uploaded By : [MT Musics](http://t.me/mt_music_24)**'
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
