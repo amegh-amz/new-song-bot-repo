@@ -1,4 +1,3 @@
-
 from pyrogram import Client, filters
 from pyrogram.types import (
     InlineKeyboardButton,
@@ -29,19 +28,19 @@ def time_to_seconds(time):
 ## Commands --------------------------------
 @bot.on_message(filters.command(['start']))
 def start(client, message):
-    darkprince = f' Hello {message.from_user.mention},\n\nMy Name Is Emma.I can upload songs from YouTube. But I Can Only Work In My Music Group'
+    amegh = f'**Hi {message.from_user.mention},\n\nI Can Download Song's From YouTube. But I Can Only Work In My Music Group.**'
     message.reply_text(
-        text=darkprince, 
+        text=amegh, 
         quote=False,
         reply_markup=InlineKeyboardMarkup(
-     [[
-      InlineKeyboardButton('Music Group ', url='https://t.me/mt_music_24'),
-      InlineKeyboardButton('Movie Group ', url='https://t.me/mt_chats_24')
-     ],[
-      InlineKeyboardButton('Cᴏɴᴛᴀᴄᴛ Mʏ Cʀᴇᴀᴛᴏʀ ', url='https://t.me/amzmtaccount')
-    ]]
-
-
+            [
+                [
+                    InlineKeyboardButton('Music Group 🎸, url='https://t.me/mr_dark_pri'),
+                    InlineKeyboardButton('Owner', url='https://t.me/amzmtaccount')
+                ]
+            ]
+        )
+    )
 
 @bot.on_message(filters.command(['mt']))
 def a(client, message):
@@ -49,7 +48,7 @@ def a(client, message):
     for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
-    m = message.reply('`Searching Your Music...`')
+    m = message.reply('`Searching Your Music....`')
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = []
@@ -87,7 +86,7 @@ def a(client, message):
         )
         print(str(e))
         return
-    m.edit("`Uploading Your Music. Please Wait...")
+    m.edit("`Uploading Your Music Please Wait... `")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
@@ -101,7 +100,7 @@ def a(client, message):
         message.reply_audio(audio_file, caption=rep, parse_mode='md',quote=False, title=title, duration=dur, thumb=thumb_name)
         m.delete()
     except Exception as e:
-        m.edit('❌ Error')
+        m.edit('**Server Error **')
         print(e)
     try:
         os.remove(audio_file)
