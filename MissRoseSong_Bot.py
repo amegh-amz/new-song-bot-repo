@@ -28,7 +28,7 @@ def time_to_seconds(time):
 ## Commands --------------------------------
 @bot.on_message(filters.command(['start']))
 def start(client, message):
-    amegh ="**Hi [{}](tg://user?id={}), \n\nI Can Download Song's From YouTube. But I Can Only Work In My Music Group.**"
+    amegh ="f**Hi [{}](tg://user?id={}), \n\nI Can Download Song's From YouTube. But I Can Only Work In My Music Group.**"
     message.reply_text(
         text=amegh, 
         quote=False,
