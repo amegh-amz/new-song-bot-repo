@@ -1,1 +1,1 @@
-worker: python3 MissRoseSong_Bot.py
+worker: python3 EmmaMusic.py
