@@ -8,7 +8,7 @@ from youtube_search import YoutubeSearch
 import requests
 
 import os
-from config import, BOT_TOKEN, API_HASH, API_ID, HEROKU_APP
+from config import BOT_TOKEN, API_HASH, API_ID, HEROKU_APP
 
 bot = Client('MissRose',
       bot_token = BOT_TOKEN,
