@@ -8,14 +8,12 @@ from youtube_search import YoutubeSearch
 import requests
 
 import os
-from config import Config
+from config import, BOT_TOKEN, API_HASH, API_ID, HEROKU_APP
 
-bot = Client(
-    'MissRose',
-    bot_token = Config.BOT_TOKEN,
-    api_id = Config.API_ID,
-    api_hash = Config.API_HASH
-)
+bot = Client('MissRose',
+      bot_token = BOT_TOKEN,
+      api_id = API_ID,
+      api_hash = API_HASH)
 
 ## Extra Fns -------------------------------
 
@@ -33,16 +31,16 @@ def start(client, message):
         text=amegh, 
         quote=False,
         reply_markup=InlineKeyboardMarkup(
-            [
+                [[
+                    InlineKeyboardButton('Music 🎸', url='http://t.me/mt_music_24'),
+                    InlineKeyboardButton('Movie', url='https://t.me/MovieTownChat')
+                ],
                 [
-                    InlineKeyboardButton('Music Group 🎸', url='http://t.me/mt_music_24'),
-                    InlineKeyboardButton('Owner', url='https://t.me/amzmtaccount')
-                ]
-            ]
-        )
-    )
-
-@bot.on_message(filters.command(['mt', 'song', 'music', 'yt']) & (filters.chat("mt_music_24") | filters.user("Aswin_Raj_TG")))
+                    InlineKeyboardButton('Owner', url='https://t.me/AmzMtAccount')
+                ]]
+))
+ 
+@bot.on_message(filters.command(['mt', 'song', 'music', 'yt']) & (filters.chat("mt_music_24") | filters.user("AmzMtAccount")))
 def a(client, message):
     query = ''
     for i in message.command[1:]:
@@ -86,7 +84,7 @@ def a(client, message):
         )
         print(str(e))
         return
-    m.edit("`Uploading Your Music Please Wait... `")
+    m.edit("`Downloading...`")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
@@ -97,11 +95,15 @@ def a(client, message):
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
             secmul *= 60
+        m.edit("`Uploading Your Music...`")
+        message.reply_chat_action("upload_audio")
         message.reply_audio(audio_file, caption=rep, parse_mode='md',quote=False, title=title, duration=dur, thumb=thumb_name)
         m.delete()
     except Exception as e:
-        m.edit('**Server Error **')
-        print(e)
+        m.edit('**🐞 Download Error.\nSorry {message.from.user.mention},**\nThere Is An Error In Uploading Your Music.Im Trying To Fix It Please Request This Song After A Minute.')
+        HEROKU_APP.restart()
+        print("Bot Restarted | Errors Fixed")
+       
     try:
         os.remove(audio_file)
         os.remove(thumb_name)
